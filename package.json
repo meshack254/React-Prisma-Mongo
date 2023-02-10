@@ -1,0 +1,11 @@
+{
+    "name": "react_prisma_mongo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "front": "cd Frontend && npm run dev",
+      "back": "cd Backend && nodemon index.js"
+    }
+  }
+  

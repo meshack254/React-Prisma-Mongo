@@ -1,20 +1,15 @@
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 import { Avatar, Card } from "antd";
-import { Button, Space } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Forms from "./Forms";
 
 const { Meta } = Card;
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [getPost, setGetPost] = useState();
 
   useEffect(() => {
+    console.log("Connecting");
     axios
       .get("http://localhost:8080/user", () => {
         params: {
@@ -30,14 +25,8 @@ const App = () => {
       });
   }, []);
 
-  const submitBtn = () => {
-    // axios.post("", {
-    //   name: "Jane Doe",
-    //   email: "doe@gmail.com"
-    // })
-  };
   return (
-    <>
+    <section>
       {posts.map((postContent) => {
         return (
           <section className="cards">
@@ -51,11 +40,6 @@ const App = () => {
                   src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                 />
               }
-              actions={[
-                <SettingOutlined key="setting" />,
-                <EditOutlined key="edit" />,
-                <EllipsisOutlined key="ellipsis" />,
-              ]}
             >
               <Meta
                 avatar={
@@ -68,7 +52,9 @@ const App = () => {
           </section>
         );
       })}
-    </>
+      <Forms />
+
+    </section>
   );
 };
 export default App;
