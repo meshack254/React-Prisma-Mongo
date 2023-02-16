@@ -12,6 +12,7 @@ datasource db {
 
 model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  imageURL  String
   title     String
   body      String
   createdAt DateTime @default(now())

@@ -23,16 +23,19 @@ app.post("/newuser", (req, res) => {
         email: body.email,
         Posts: {
           create: {
+            imageURL: body.imageURL,
             title: body.title,
             body: body.body,
           },
         },
       },
+
       update: {
         name: body.name,
         email: body.email,
         Posts: {
           create: {
+            imageURL: body.imageURL,
             title: body.title,
             body: body.body,
           },
@@ -53,12 +56,16 @@ app.post("/newuser", (req, res) => {
 });
 
 //Read request
-app.get("/user", (req, res) => {
+app.get("/posts", (req, res) => {
   async function main() {
     await prisma.$connect();
-    const users = await prisma.user.findMany();
-    res.send(users);
-    console.log(users);
+    const posts = await prisma.post.findMany({
+      include: {
+        user: true
+      }
+    });
+    res.send(posts);
+    console.log(posts);
   }
 
   main()
@@ -74,8 +81,11 @@ app.get("/user", (req, res) => {
 
 //Update request
 
+
+
 //Delete request
 
 const server = app.listen(process.env.PORT, () => {
   console.log("Server running");
 });
+

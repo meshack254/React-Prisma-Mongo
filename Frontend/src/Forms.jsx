@@ -7,6 +7,7 @@ const Forms = () => {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [img, setImg] = useState("");
 
   const createNewPost = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ const Forms = () => {
       .post("http://localhost:8080/newuser", {
         name: name,
         email: email,
+        imageURL: img,
         title: title,
         body: body,
       })
@@ -33,26 +35,40 @@ const Forms = () => {
           type="text"
           name="name"
           placeholder="Your name"
+          maxLength="30"
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           name="email"
           placeholder="Email"
+          maxLength="50"
           onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          name="Image URL"
+          placeholder="Cover image URL"
+          maxLength="500"
+          onChange={(e) => setImage(e.target.value)}
         />
         <input
           type="text"
           name="title"
           placeholder="Title"
+          maxLength="30"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
+        <textarea
           type="text"
           name="body"
+          className="bodyInput"
           placeholder="Content"
+          maxLength="300"
+          rows="4"
+          cols="50"
           onChange={(e) => setBody(e.target.value)}
-        />
+        ></textarea>
         <button
           className="submitBtn"
           type="button"
@@ -91,6 +107,11 @@ const FormContainer = styled.section`
     }
     .submitBtn {
       padding: 1em 10em;
+    }
+    .bodyInput {
+      height: 80px;
+      word-wrap: break-word;
+      word-break: break-all;
     }
   }
 `;
